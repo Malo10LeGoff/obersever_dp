@@ -1,4 +1,5 @@
 #include "observer.h"
+#include <ostream>
 
 class Radiator : public Observer
 {
@@ -8,10 +9,13 @@ public:
 	void update() override final;
 	void info() override final;
 	bool isOn() const;
+
 private:
 	bool _isOn;
 };
 
-inline std::ostream& operator<< (std::ostream& flot, const Radiator& rad){
+std::ostream &operator<<(std::ostream &flot, const Radiator &rad)
+{
 	flot << "Radiator is on:" << rad.isOn();
+	return flot;
 }

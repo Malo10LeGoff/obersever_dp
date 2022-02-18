@@ -11,10 +11,12 @@ int main(int argc, char **argv)
 	int T1 = 24;
 	std::list<Observer *> obs_list;
 
+	bool state_rad = false;
+	Radiator observer_1 = Radiator(state_rad);
+
 	for (int i = 0; i < 10; i++)
 	{
-		bool state_rad = false;
-		Radiator observer_1 = Radiator(state_rad);
+
 		obs_list.push_back(observer_1);
 	}
 

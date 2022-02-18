@@ -3,7 +3,7 @@
 
 Radiator::Radiator(bool state_obs)
 {
-	_isOn = false;
+	_isOn = state_obs;
 	std::cout << "Constructor called " << this << std::endl;
 }
 
