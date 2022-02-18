@@ -4,7 +4,7 @@
 class Thermometer : public Observable
 {
 public:
-	Thermometer();
+	Thermometer(int Tconsigne, std::list<Observer *> list_observer);
 	~Thermometer();
 	std::list<Observer *> getObservers();
 	int getConsigne();

@@ -2,9 +2,13 @@
 #include "observer.h"
 #include <iostream>
 
-Thermometer::Thermometer()
+Thermometer::Thermometer(
+    int Tconsigne, std::list<Observer *> list_observer)
 {
-    std::cout << "Constructor called " << this << std::endl;
+    this->Tconsigne = Tconsigne;
+    this->observer_list = list_observer;
+    std::cout
+        << "Constructor called " << this << std::endl;
 }
 
 Thermometer::~Thermometer()

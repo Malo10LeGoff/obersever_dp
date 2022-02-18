@@ -1,8 +1,9 @@
 #include "radiator.h"
 #include <iostream>
 
-Radiator::Radiator()
+Radiator::Radiator(bool state_obs)
 {
+	this->state = state_obs;
 	std::cout << "Constructor called " << this << std::endl;
 }
 
