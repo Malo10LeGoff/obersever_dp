@@ -8,7 +8,6 @@ public:
 	~Thermometer();
 	std::list<Observer *> getObservers();
 	int getConsigne();
-	std::list<Observer *> getObservers();
 	void setObservers(std::list<Observer *> observers_list);
 	void setConsigne(double Twanted);
 	void measure() override final;

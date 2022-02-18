@@ -27,17 +27,14 @@ void Thermometer::setConsigne(double Twanted)
     this->Tconsigne = Twanted;
 }
 
-void Thermometer::setObservers(std::list<Observer *> observers_list)
+std::list<Observer *> Thermometer::getObservers()
 {
-    this->observer_list = observers_list;
+    std::cout << "Cc" << std::endl;
+    return this->observer_list;
 }
 
-void Thermometer::getConsigne()
+int Thermometer::getConsigne()
 {
     std::cout << this->Tconsigne << std::endl;
-}
-
-void Thermometer::setObservers(std::list<Observer *> observers_list)
-{
-    this->observer_list = observers_list;
+    return this->Tconsigne;
 }
