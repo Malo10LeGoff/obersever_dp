@@ -3,6 +3,7 @@
 
 Fan::Fan()
 {
+	_isOn = true;
 	std::cout << "Constructor called " << this << std::endl;
 }
 
@@ -13,7 +14,7 @@ Fan::~Fan()
 
 void Fan::update()
 {
-	std::cout << "Fan updated" << std::endl;
+	this->_isOn = !this->_isOn;
 }
 
 void Fan::info()
