@@ -1,15 +1,16 @@
 #include "observable.h"
 #include "observer.h"
+#include <vector>
 
 class Thermometer : public Observable
 {
 public:
-	Thermometer(int Tconsigne, std::list<Observer *> list_observer);
+	Thermometer(int Tconsigne, std::vector<Observer *> list_observer);
 	~Thermometer();
-	std::list<Observer *> getObservers();
+	std::vector<Observer *> getObservers();
 	int getConsigne();
-	void setObservers(std::list<Observer *> observers_list);
+	void setObservers(std::vector<Observer *> observers_list);
 	void setConsigne(double Twanted);
-	void measure() override final;
+	void measure(int T) override final;
 	void notify() override final;
 };

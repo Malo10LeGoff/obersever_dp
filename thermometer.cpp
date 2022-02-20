@@ -1,9 +1,10 @@
 #include "thermometer.h"
 #include "observer.h"
 #include <iostream>
+#include <vector>
 
 Thermometer::Thermometer(
-    int Tconsigne, std::list<Observer *> list_observer)
+    int Tconsigne, std::vector<Observer *> list_observer)
 {
     this->Tconsigne = Tconsigne;
     this->observer_list = list_observer;
@@ -16,14 +17,56 @@ Thermometer::~Thermometer()
     std::cout << "Destructor called" << this << std::endl;
 }
 
-void Thermometer::measure()
+void Thermometer::measure(int T)
 {
-    std::cout << "Measure taken updated" << std::endl;
+    this->Tmeasured = T;
+    std::cout << "Measure taken, changed to " << this->Tmeasured << std::endl;
 }
 
 void Thermometer::notify()
 {
-    std::cout << "Information obtained" << this << std::endl;
+    std::cout << "Notifying the observers..." << std::endl;
+
+    double delta_T = this->Tconsigne - this->Tmeasured;
+    int nb_observers = this->observer_list.size();
+
+    for (int i = 0; i < nb_observers; ++i)
+    {
+        if (this->observer_list[i]->type == "R")
+        {
+            if (delta_T > 0)
+            {
+                if (observer_list[i]->isOn() == false)
+                {
+                    observer_list[i]->update();
+                }
+            }
+            if (delta_T < 0)
+            {
+                if (observer_list[i]->isOn() == true)
+                {
+                    observer_list[i]->update();
+                }
+            }
+        }
+        else
+        {
+            if (delta_T > 0)
+            {
+                if (observer_list[i]->isOn() == true)
+                {
+                    observer_list[i]->update();
+                }
+            }
+            if (delta_T < 0)
+            {
+                if (observer_list[i]->isOn() == false)
+                {
+                    observer_list[i]->update();
+                }
+            }
+        }
+    }
 }
 
 void Thermometer::setConsigne(double Twanted)
@@ -31,7 +74,7 @@ void Thermometer::setConsigne(double Twanted)
     this->Tconsigne = Twanted;
 }
 
-std::list<Observer *> Thermometer::getObservers()
+std::vector<Observer *> Thermometer::getObservers()
 {
     std::cout << "Cc" << std::endl;
     return this->observer_list;

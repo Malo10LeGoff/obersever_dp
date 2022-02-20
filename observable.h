@@ -1,15 +1,16 @@
 #ifndef _OBSERVABLE_
 #define _OBSERVABLE_
 #include "observer.h"
-#include <list>
+#include <vector>
 
 class Observable
 {
 public:
 	double Tconsigne;
-	std::list<Observer *> observer_list;
+	double Tmeasured;
+	std::vector<Observer *> observer_list;
 	virtual ~Observable(){};
-	virtual void measure() = 0;
+	virtual void measure(int T) = 0;
 	virtual void notify() = 0;
 };
 
