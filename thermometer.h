@@ -13,4 +13,5 @@ public:
 	void setConsigne(double Twanted);
 	void measure(int T) override final;
 	void notify() override final;
+	void info();
 };

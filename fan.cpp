@@ -23,11 +23,6 @@ bool Fan::isOn() const
 	return this->_isOn;
 }
 
-void Fan::info()
-{
-	std::cout << "Information obtained" << this << std::endl;
-}
-
 std::ostream &operator<<(std::ostream &flot, Fan const &fan)
 {
 	flot << "Fan is on:" << fan.isOn();

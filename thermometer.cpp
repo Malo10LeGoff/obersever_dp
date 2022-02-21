@@ -2,25 +2,24 @@
 #include "observer.h"
 #include <iostream>
 #include <vector>
+#include <typeinfo>
+#include <string.h>
 
 Thermometer::Thermometer(
     int Tconsigne, std::vector<Observer *> list_observer)
 {
     this->Tconsigne = Tconsigne;
     this->observer_list = list_observer;
-    std::cout
-        << "Constructor called " << this << std::endl;
 }
 
 Thermometer::~Thermometer()
 {
-    std::cout << "Destructor called" << this << std::endl;
 }
 
 void Thermometer::measure(int T)
 {
     this->Tmeasured = T;
-    std::cout << "Measure taken, changed to " << this->Tmeasured << std::endl;
+    std::cout << "Measure taken, the temperature measured changed to " << this->Tmeasured << std::endl;
 }
 
 void Thermometer::notify()
@@ -32,18 +31,19 @@ void Thermometer::notify()
 
     for (int i = 0; i < nb_observers; ++i)
     {
-        if (this->observer_list[i]->type == "R")
+        const char *type_obs = observer_list[i]->type;
+        if (strcmp(type_obs, "R") == 0)
         {
             if (delta_T > 0)
             {
-                if (observer_list[i]->isOn() == false)
+                if (observer_list[i]->_isOn == false)
                 {
                     observer_list[i]->update();
                 }
             }
             if (delta_T < 0)
             {
-                if (observer_list[i]->isOn() == true)
+                if (observer_list[i]->_isOn == true)
                 {
                     observer_list[i]->update();
                 }
@@ -53,20 +53,47 @@ void Thermometer::notify()
         {
             if (delta_T > 0)
             {
-                if (observer_list[i]->isOn() == true)
+                if (observer_list[i]->_isOn == true)
                 {
                     observer_list[i]->update();
                 }
             }
             if (delta_T < 0)
             {
-                if (observer_list[i]->isOn() == false)
+                if (observer_list[i]->_isOn == false)
                 {
                     observer_list[i]->update();
                 }
             }
         }
     }
+}
+
+void Thermometer::info()
+{
+
+    int nb_observers = this->observer_list.size();
+    int nb_rads_on = 0;
+    int nb_fans_on = 0;
+
+    for (int i = 0; i < nb_observers; ++i)
+    {
+        if (this->observer_list[i]->_isOn == true)
+        {
+            const char *type_obs = observer_list[i]->type;
+            if (strcmp(type_obs, "R") == 0)
+            {
+                nb_rads_on = nb_rads_on + 1;
+            }
+            else
+            {
+                nb_fans_on = nb_fans_on + 1;
+            }
+        }
+    }
+
+    std::cout << "Number of Radiators on : " << nb_rads_on << std::endl;
+    std::cout << "Number of Fans on : " << nb_fans_on << std::endl;
 }
 
 void Thermometer::setConsigne(double Twanted)
@@ -76,12 +103,10 @@ void Thermometer::setConsigne(double Twanted)
 
 std::vector<Observer *> Thermometer::getObservers()
 {
-    std::cout << "Cc" << std::endl;
     return this->observer_list;
 }
 
 int Thermometer::getConsigne()
 {
-    std::cout << this->Tconsigne << std::endl;
     return this->Tconsigne;
 }

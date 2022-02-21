@@ -8,7 +8,6 @@ public:
     bool state;
     const char *type;
     virtual void update() = 0;
-    virtual void info() = 0;
     bool isOn() const;
     bool _isOn;
 };

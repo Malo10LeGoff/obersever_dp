@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	// Build the thermometer
 	int Tcons = 20;
 	int T = 20;
-	int nb_iterations = 5;
+	int nb_iterations = 20;
 	Thermometer therm1 = Thermometer(Tcons, obs_list);
 	therm1.measure(T);
 	int temp_icrements[2] = {1, -1};
@@ -38,6 +38,12 @@ int main(int argc, char **argv)
 
 		// Notify the observers
 		therm1.notify();
+
+		// Display thermometer's info
+		therm1.info();
+
+		std::cout << "\n"
+				  << std::endl;
 	}
 
 	return 0;
