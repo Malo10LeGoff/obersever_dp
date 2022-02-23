@@ -14,4 +14,5 @@ public:
 	void measure(int T) override final;
 	void notify() override final;
 	void info();
+	void check_subscriptions();
 };

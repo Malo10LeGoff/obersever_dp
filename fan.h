@@ -7,6 +7,8 @@ public:
 	Fan(bool state_obs);
 	~Fan();
 	void update() override final;
+	void subscribe();
+	void unsubscribe();
 	bool isOn() const;
 };
 

@@ -29,6 +29,12 @@ int main(int argc, char **argv)
 	therm1.measure(T);
 	int temp_icrements[2] = {1, -1};
 
+	/* observer_1->unsubscribe(); // If you want to remove one observer from the observer_list of the thermometer, follow this structure
+
+	therm1.check_subscriptions();
+
+	std::cout << therm1.observer_list.size() << std::endl; */
+
 	for (int i = 0; i < nb_iterations; ++i)
 	{
 		// Set the new temperature
@@ -45,6 +51,5 @@ int main(int argc, char **argv)
 		std::cout << "\n"
 				  << std::endl;
 	}
-
 	return 0;
 }

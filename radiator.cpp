@@ -5,6 +5,7 @@ Radiator::Radiator(bool state_obs)
 {
 	this->_isOn = state_obs;
 	this->type = "R";
+	this->isSubscribed = true;
 }
 
 Radiator::~Radiator()
@@ -14,6 +15,16 @@ Radiator::~Radiator()
 void Radiator::update()
 {
 	this->_isOn = !this->_isOn;
+}
+
+void Radiator::subscribe()
+{
+	this->isSubscribed = true;
+}
+
+void Radiator::unsubscribe()
+{
+	this->isSubscribed = false;
 }
 
 bool Radiator::isOn() const

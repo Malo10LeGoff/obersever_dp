@@ -3,9 +3,9 @@
 
 Fan::Fan(bool state_obs)
 {
-	_isOn = state_obs;
+	this->_isOn = state_obs;
 	this->type = "F";
-	std::cout << "Constructor called " << this << std::endl;
+	this->isSubscribed = true;
 }
 
 Fan::~Fan()
@@ -21,6 +21,16 @@ void Fan::update()
 bool Fan::isOn() const
 {
 	return this->_isOn;
+}
+
+void Fan::subscribe()
+{
+	this->isSubscribed = true;
+}
+
+void Fan::unsubscribe()
+{
+	this->isSubscribed = false;
 }
 
 std::ostream &operator<<(std::ostream &flot, Fan const &fan)

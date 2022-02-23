@@ -110,3 +110,18 @@ int Thermometer::getConsigne()
 {
     return this->Tconsigne;
 }
+
+void Thermometer::check_subscriptions()
+{
+    int nb_observers = this->observer_list.size();
+    std::vector<Observer *> new_obs_list;
+
+    for (int i = 0; i < nb_observers; ++i)
+    {
+        if (this->observer_list[i]->isSubscribed == true)
+        {
+            new_obs_list.push_back(this->observer_list[i]);
+        }
+    }
+    this->observer_list = new_obs_list;
+}

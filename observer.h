@@ -10,6 +10,7 @@ public:
     virtual void update() = 0;
     bool isOn() const;
     bool _isOn;
+    bool isSubscribed;
 };
 
 std::ostream &operator<<(std::ostream &flot, Observer const &obs);
