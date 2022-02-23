@@ -14,5 +14,7 @@ public:
 };
 
 std::ostream &operator<<(std::ostream &flot, Observer const &obs);
+// We overloaded the << operator to have an easy and fast mean of
+// checking if an object of class Observer is On or Off
 
 #endif

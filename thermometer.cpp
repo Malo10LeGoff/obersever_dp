@@ -24,48 +24,54 @@ void Thermometer::measure(int T)
 
 void Thermometer::notify()
 {
-    std::cout << "Notifying the observers..." << std::endl;
 
     double delta_T = this->Tconsigne - this->Tmeasured;
     int nb_observers = this->observer_list.size();
-
-    for (int i = 0; i < nb_observers; ++i)
+    if (delta_T != 0) // If the temperature hasn't changed, there is no need to notify the observers
     {
-        const char *type_obs = observer_list[i]->type;
-        if (strcmp(type_obs, "R") == 0)
+        std::cout << "Notifying the observers..." << std::endl;
+        for (int i = 0; i < nb_observers; ++i)
         {
-            if (delta_T > 0)
+            const char *type_obs = observer_list[i]->type;
+            if (strcmp(type_obs, "R") == 0)
             {
-                if (observer_list[i]->_isOn == false)
+                if (delta_T > 0)
                 {
-                    observer_list[i]->update();
+                    if (observer_list[i]->_isOn == false)
+                    {
+                        observer_list[i]->update();
+                    }
+                }
+                if (delta_T < 0)
+                {
+                    if (observer_list[i]->_isOn == true)
+                    {
+                        observer_list[i]->update();
+                    }
                 }
             }
-            if (delta_T < 0)
+            else
             {
-                if (observer_list[i]->_isOn == true)
+                if (delta_T > 0)
                 {
-                    observer_list[i]->update();
+                    if (observer_list[i]->_isOn == true)
+                    {
+                        observer_list[i]->update();
+                    }
+                }
+                if (delta_T < 0)
+                {
+                    if (observer_list[i]->_isOn == false)
+                    {
+                        observer_list[i]->update();
+                    }
                 }
             }
         }
-        else
-        {
-            if (delta_T > 0)
-            {
-                if (observer_list[i]->_isOn == true)
-                {
-                    observer_list[i]->update();
-                }
-            }
-            if (delta_T < 0)
-            {
-                if (observer_list[i]->_isOn == false)
-                {
-                    observer_list[i]->update();
-                }
-            }
-        }
+    }
+    else
+    {
+        std::cout << "No change of temperature, the observers need not to be notified" << std::endl;
     }
 }
 
